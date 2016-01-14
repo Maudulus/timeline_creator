@@ -25,7 +25,6 @@
     background: #88b7d5;
     // border: 4px solid #c2e1f5;
     &:after, &:before{
-      left: 100%;
       // top: 50%;
       border: solid transparent;
       content: " ";
@@ -36,15 +35,20 @@
     }
     &:after {
       border-color: rgba(136, 183, 213, 0);
-      border-left-color: #88b7d5;
-      border-width: 30px;
-      display:none;
-      margin-top: -30px;
+      border-right-color: #88b7d5;
+      border-width: 14px;
+      right:100%;
+      top:10px;
+      visibility:hidden;
+      // margin-top: -30px;
     }
     &:before {
       border-color: rgba(194, 225, 245, 0);
       border-left-color: #88b7d5;
       border-width: 14px;
+      left: 100%;
+      visibility:hidden;
+
       // margin-top: -36px;
       // margin-top: 5px;
     }

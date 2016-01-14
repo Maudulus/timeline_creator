@@ -38,6 +38,7 @@ if (Meteor.isClient) {
 				$('.timeline-event').remove();
 				$('.arrow_box').remove();
 				var currentIndex = $(event.target).index();
+				console.log(currentIndex)
 				var chosenMonth = $('.leftDate .specificDateVert:nth-child('+(currentIndex+1)+')').text();
 				var currentYear = (new Date).getFullYear().toString();
 				var userEvents = newEvent.find({user:Meteor.user()._id}).fetch();

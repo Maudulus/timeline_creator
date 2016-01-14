@@ -1,0 +1,59 @@
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>timeline-meteor</title>
+	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="grid-frame">
+	<div class="grid-block">
+		<div class="small-12 columns contain-to-grid">
+			<nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
+				{{> loginButtons}}
+			</nav>
+		</div>	
+		<div id="firstModal" class="reveal-modal row" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+
+			<h2 id="firstModalTitle">Add an Event</h2>
+			<div id="date-picker" ></div>
+			
+			<div class="columns text-center event-types">
+				<div class="row collapse prefix-radius">
+					<div class="small-4 medium-3 large-2 columns">
+						<span class="prefix">Event Name</span>
+					</div>
+					<div class="small-8 medium-9 large-10 columns">
+						<input type="text" placeholder="What do you want to call this event?" class="event-name">
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 columns">
+					<label style="text-align:left;">Event Description
+							<textarea placeholder="How would you describe this event?" class="event-description"></textarea>
+						</label>
+					</div>
+				</div>			
+				{{> modalButtons}}
+			</div>
+
+			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+		</div>
+		<a href="#" data-reveal-id="firstModal" class="button plot-event">Plot Event</a>
+		<input type="date" id="start-date" style="width:1px;height:1px;padding:0;">
+		<div class="timelineVertical" style="transition: margin-left 0.7s;">
+			<ul class="dateDivVert leftDate"></ul>
+			<ul class="verticalLineUlMobile leftVL"></ul>
+			<ul class="verticalLineUlMobile rightVL"></ul>
+			<ul class="dateDivVert rightDate"></ul>
+			<ul class="bubbleUlVert"></ul>
+		</div>
+	</div>
+</body>
+
+<template name="modalButtons">
+	<ul class="stack-for-small button-group row">
+		<li class="large-4 medium-4 columns"><a href="#" class="button choose-date" id="event-type-1">Event Type 1</a></li>
+		<li class="large-4 medium-4 columns"><a href="#" class="button choose-date" id="event-type-2">Event Type 2</a></li>
+		<li class="large-4 medium-4 columns"><a href="#" class="button choose-date" id="event-type-3">Event Type 3</a></li>
+	</ul>
+</template>

@@ -60,8 +60,13 @@ if (Meteor.isClient) {
 				for (var it=0;it<count;it++){
 					var desiredOffset = $('.timeline-event.offset-'+it).offset();
 					console.log(desiredOffset)
-					// $('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
-					$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left + 40 });				
+					if ( (currentIndex%2) == 0){
+						$('body').append('<style class="tempStyling">.arrow_box:before{visibility:visible !important; }</style>');
+						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
+					}else{
+						$('body').append('<style class="tempStyling">.arrow_box:after{visibility:visible !important; }</style>');
+						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left + 40 });				
+					}
 				}
 			}
 		}	

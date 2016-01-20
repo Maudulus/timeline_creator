@@ -33,15 +33,17 @@ $(document).ready(function(){
 	        }
 	        var currentMonth=today.getMonth();
 	        var dateIndex;
-	        for(var m=0;m<12;m++){
+	        var d = new Date();
+			var n = d.getMonth()+1;
+	        for(var m=0;m<n;m++){
+		        $('.bubbleUlVert').append('<li></li>');
+		        $('.verticalLineUlMobile').append('<li class="verticalLineMobile"></li>');		        
+		        $('.dateDivVert').append('<li class="specificDateVert" style="color: rgb(245, 130, 158);">'+months[currentMonth]+'</li>');
 	        	if(currentMonth == 11){
 	        		currentMonth = 0;
 	        	}else{
 	        		currentMonth++;
 	        	}
-		        $('.bubbleUlVert').append('<li></li>');
-		        $('.verticalLineUlMobile').append('<li class="verticalLineMobile"></li>');		        
-		        $('.dateDivVert').append('<li class="specificDateVert" style="color: rgb(245, 130, 158);">'+months[currentMonth]+'</li>');
 	        }	        
         }
         colorTimeline();
@@ -108,6 +110,7 @@ function revertToCenter(){
 	$('.timelineVertical').css('margin-left','0');
 	$('.timelineVertical ul li').removeClass('no-show');
 	$('.timelineVertical ul li').removeClass('show');
+	$('.tempStyling').remove();
 }
 // function addTimelineBubbles(){
 // 	$('.bubbleUlVert li').on('click',function(){

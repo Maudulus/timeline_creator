@@ -53,6 +53,9 @@ $(document).ready(function(){
 	$('.login-link-and-dropdown-list a.login-link-text').on('click',function(){
 	  $('#login-dropdown-list').slideToggle();
 	});
+	$('.choose-date').on('click',function(){
+		closeModal();
+	});
 });
 var calculateYears = function(startDate) {
     var now = new Date();
@@ -111,6 +114,10 @@ function revertToCenter(){
 	$('.timelineVertical ul li').removeClass('no-show');
 	$('.timelineVertical ul li').removeClass('show');
 	$('.tempStyling').remove();
+}
+function closeModal(){
+	console.log('closing...')
+	$('a.close-reveal-modal').trigger('click');
 }
 // function addTimelineBubbles(){
 // 	$('.bubbleUlVert li').on('click',function(){

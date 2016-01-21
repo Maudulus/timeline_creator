@@ -62,10 +62,10 @@ if (Meteor.isClient) {
 					console.log(desiredOffset)
 					if ( (currentIndex%2) == 0){
 						$('body').append('<style class="tempStyling">.arrow_box:before{visibility:visible !important; }</style>');
-						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
+						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-40,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
 					}else{
 						$('body').append('<style class="tempStyling">.arrow_box:after{visibility:visible !important; }</style>');
-						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left + 40 });				
+						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-40,left: desiredOffset.left + 40 });				
 					}
 				}
 			}

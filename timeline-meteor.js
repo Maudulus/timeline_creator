@@ -61,11 +61,13 @@ if (Meteor.isClient) {
 					var desiredOffset = $('.timeline-event.offset-'+it).offset();
 					console.log(desiredOffset)
 					if ( (currentIndex%2) == 0){
+						console.log('a******')
 						$('body').append('<style class="tempStyling">.arrow_box:before{visibility:visible !important; }</style>');
-						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-40,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
+						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
 					}else{
+						console.log('b******')
 						$('body').append('<style class="tempStyling">.arrow_box:after{visibility:visible !important; }</style>');
-						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-40,left: desiredOffset.left + 40 });				
+						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left + 40 });				
 					}
 				}
 			}

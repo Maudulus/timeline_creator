@@ -19,7 +19,7 @@ if (Meteor.isClient) {
 	});
 	Template.body.events({
 		"blur #start-date": function (event) {
-			if( Meteor.user() && !StartDate.find({user:Meteor.user()._id}).fetch().length){
+			if( Meteor.user() && !StartDate.find({email:Meteor.user().emails[0].address}).fetch().length){
 				var date = event.target.value;
 				StartDate.insert({
 					date: date,
@@ -41,14 +41,15 @@ if (Meteor.isClient) {
 				console.log(currentIndex)
 				var chosenMonth = $('.leftDate .specificDateVert:nth-child('+(currentIndex+1)+')').text();
 				var currentYear = (new Date).getFullYear().toString();
-				var userEvents = newEvent.find({user:Meteor.user()._id}).fetch();
+				var userEvents = newEvent.find({email:Meteor.user().emails[0].address}).fetch();
+				console.log(userEvents)
 				var count = 0;
 				$.each(userEvents,function(index,thisEvent){
 					var monthWord = months[Number(thisEvent.date.split('/')[0]-1)];
 					var year = thisEvent.date.split('/')[2];
 					if( (monthWord == chosenMonth && currentYear == year) || year.toString() == chosenMonth){
 						$('.bubbleUlVert li:nth-child('+(currentIndex+1)+')').after('<li class="timeline-event offset-'+count+'"></li>');
-						$('.timelineVertical').prepend('<div class="arrow_box offset-'+count+'"><p>'+thisEvent.description+'</p></div>');
+						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><p>'+thisEvent.description+'</p></div>');
 						count++;
 					}
 				});

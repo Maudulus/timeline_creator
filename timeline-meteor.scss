@@ -61,6 +61,39 @@
       // margin-top: -36px;
       // margin-top: 5px;
     }
+    &.event-type-1{
+      background:#A8B3CD;
+      &:after {
+        border-right-color: #A8B3CD;
+        visibility:hidden;
+      }
+      &:before {
+        border-left-color: #A8B3CD;
+        visibility:hidden;
+      }      
+    }    
+    &.event-type-2{
+      background:#9BC2C2;
+      &:after {
+        border-right-color: #9BC2C2;
+        visibility:hidden;
+      }
+      &:before {
+        border-left-color: #9BC2C2;
+        visibility:hidden;
+      }        
+    }
+    &.event-type-3{
+      background:#FFE4CC;
+      &:after {
+        border-right-color: #FFE4CC;
+        visibility:hidden;
+      }
+      &:before {
+        border-left-color: #FFE4CC;
+        visibility:hidden;
+      }         
+    }
   }
 
   .bubbleUlVert {

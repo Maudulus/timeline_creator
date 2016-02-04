@@ -49,7 +49,7 @@ if (Meteor.isClient) {
 					var year = thisEvent.date.split('/')[2];
 					if( (monthWord == chosenMonth && currentYear == year) || year.toString() == chosenMonth){
 						$('.bubbleUlVert li:nth-child('+(currentIndex+1)+')').after('<li class="timeline-event offset-'+count+'"></li>');
-						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><p>'+thisEvent.description+'</p></div>');
+						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><table><tr><td>'+thisEvent.date+'</td><td>'+thisEvent.name+'</td></tr></table><p>'+thisEvent.description+'</p></div>');
 						count++;
 					}
 				});

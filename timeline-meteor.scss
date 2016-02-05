@@ -26,7 +26,7 @@
     border-radius:7px;
     // border: 4px solid #c2e1f5;
     .rightSide{
-      padding:0px 20px 10px 20px;
+      padding:0px 20px 0px 24px;
     }
     .parentRotate{
       height: 100%;
@@ -34,6 +34,9 @@
       width: 30px;
       top: 0;      
       margin-left:-5px;
+      &.rightDate{
+        right:0;
+      }
       .vertical-text {
         transform: rotate(-90deg);
         transform-origin: left top 0;
@@ -51,6 +54,11 @@
           -moz-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
         -webkit-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
         transform:  translateX(-50%) translateY(-50%) rotate(-90deg);
+        &.rightDate{
+          -moz-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+          -webkit-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+          transform:  translateX(-50%) translateY(-50%) rotate(90deg);
+        }
       }  
     }
     .bubbleTable{

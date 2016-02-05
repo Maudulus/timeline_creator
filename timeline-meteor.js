@@ -50,8 +50,11 @@ if (Meteor.isClient) {
 					var monthWord = months[Number(thisEvent.date.split('/')[0]-1)];
 					var year = thisEvent.date.split('/')[2];
 					if( (monthWord == chosenMonth && currentYear == year) || year.toString() == chosenMonth){
+						var rightDateClass = "";
+						var rightDateClass = ( (currentIndex%2) == 0) ? "" : "rightDate";
+						console.log(rightDateClass);
 						$('.bubbleUlVert li:nth-child('+(currentIndex+1)+')').after('<li class="timeline-event offset-'+count+'"></li>');
-						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><div class="parentRotate"><div class="inner rotate">'+thisEvent.date+'</div></div><div class="rightSide"><table class="bubbleTable"><tr><td class="bubbleTableEvent">'+thisEvent.name+'</td></tr></table><p>'+thisEvent.description+'</p></div></div>');
+						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><div class="parentRotate '+rightDateClass+'"><div class="inner rotate '+rightDateClass+'">'+thisEvent.date+'</div></div><div class="rightSide"><table class="bubbleTable"><tr><td class="bubbleTableEvent">'+thisEvent.name+'</td></tr></table><p>'+thisEvent.description+'</p></div></div>');
 						count++;
 					}
 				});

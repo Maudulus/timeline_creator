@@ -17,6 +17,9 @@ if (Meteor.isClient) {
 			}
 		}
 	});
+	Template.map.events({
+
+	});
 	Template.body.events({
 		"blur #start-date": function (event) {
 			if( Meteor.user() && !StartDate.find({email:Meteor.user().emails[0].address}).fetch().length){
@@ -49,7 +52,7 @@ if (Meteor.isClient) {
 					var year = thisEvent.date.split('/')[2];
 					if( (monthWord == chosenMonth && currentYear == year) || year.toString() == chosenMonth){
 						$('.bubbleUlVert li:nth-child('+(currentIndex+1)+')').after('<li class="timeline-event offset-'+count+'"></li>');
-						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><table><tr><td>'+thisEvent.date+'</td><td>'+thisEvent.name+'</td></tr></table><p>'+thisEvent.description+'</p></div>');
+						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><div class="parentRotate"><div class="inner rotate">'+thisEvent.date+'</div></div><table class="bubbleTable"><tr><td class="bubbleTableEvent">'+thisEvent.name+'</td></tr></table><p>'+thisEvent.description+'</p></div>');
 						count++;
 					}
 				});
@@ -82,4 +85,12 @@ if (Meteor.isServer) {
     
   });
 }
+Router.route('/', function () {
+  // render the Home template with a custom data context
+  // this.render('map', {data: {}});
+});
+Router.route('/map', function () {
+  // render the Home template with a custom data context
+  this.render('map', {data: {}});
+});
 

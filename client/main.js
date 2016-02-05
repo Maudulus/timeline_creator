@@ -115,6 +115,7 @@ function revertToCenter(){
 	$('.timelineVertical ul li').removeClass('show');
 	$('.tempStyling').remove();
 }
+
 function closeModal(){
 	console.log('closing...')
 	$('a.close-reveal-modal').trigger('click');

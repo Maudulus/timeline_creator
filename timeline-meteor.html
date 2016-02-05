@@ -4,14 +4,13 @@
 	<title>timeline-meteor</title>
 	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
 </head>
-
 <body class="grid-frame">
 	<div class="grid-block">
 		<div class="small-12 columns contain-to-grid">
 			<nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
 				{{> loginButtons}}
 			</nav>
-		</div>	
+		</div>
 		<div id="firstModal" class="reveal-modal row" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
 
 			<h2 id="firstModalTitle">Add an Event</h2>
@@ -47,13 +46,15 @@
 			<ul class="dateDivVert rightDate"></ul>
 			<ul class="bubbleUlVert"></ul>
 		</div>
-	</div>
+	</div>	
 </body>
-
 <template name="modalButtons">
 	<ul class="stack-for-small button-group row">
 		<li class="large-4 medium-4 columns"><a href="#" class="button choose-date" id="event-type-1">Event Type 1</a></li>
 		<li class="large-4 medium-4 columns"><a href="#" class="button choose-date" id="event-type-2">Event Type 2</a></li>
 		<li class="large-4 medium-4 columns"><a href="#" class="button choose-date" id="event-type-3">Event Type 3</a></li>
 	</ul>
+</template>
+<template name="map">
+	
 </template>

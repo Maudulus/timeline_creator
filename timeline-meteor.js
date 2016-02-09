@@ -1,9 +1,11 @@
 var StartDate = new Mongo.Collection("startDate");
 var newEvent = new Mongo.Collection("newevent");
+var placeLatLng;
 if (Meteor.isClient) {
 	Template.modalButtons.events({
 		"click .choose-date": function (event) {
 			if( Meteor.user() ){
+				var eventLocation = $('#autocomplete').val() ? placeLatLng : "";
 				newEvent.insert({
 					type:event.target.id,
 					name: $('.event-name').val(),
@@ -11,7 +13,8 @@ if (Meteor.isClient) {
 					date: $('#date-picker').val(),
 					createdAt: new Date(),
 					user: Meteor.user()._id,
-					email: Meteor.user().emails[0].address
+					email: Meteor.user().emails[0].address,
+					location: eventLocation
 				});
 			}else{
 			}
@@ -20,6 +23,16 @@ if (Meteor.isClient) {
 	Template.map.events({
 	});
 	Template.body.events({
+		"click .plot-event": function(event){
+			var autocomplete = new google.maps.places.Autocomplete(
+				(document.getElementById('autocomplete')),{types: ['geocode'] }
+			);
+
+	        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+	           var place = autocomplete.getPlace();
+	           placeLatLng = [place.geometry.location.lng(), place.geometry.location.lat()];
+	        });
+		},
 		"click #openMap": function(event){
 			setTimeout(function(){
 				mapboxgl.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
@@ -94,11 +107,9 @@ if (Meteor.isClient) {
 				$('.timeline-event').remove();
 				$('.arrow_box').remove();
 				var currentIndex = $(event.target).index();
-				console.log(currentIndex)
 				var chosenMonth = $('.leftDate .specificDateVert:nth-child('+(currentIndex+1)+')').text();
 				var currentYear = (new Date).getFullYear().toString();
 				var userEvents = newEvent.find({email:Meteor.user().emails[0].address}).fetch();
-				console.log(userEvents)
 				var count = 0;
 				$.each(userEvents,function(index,thisEvent){
 					var monthWord = months[Number(thisEvent.date.split('/')[0]-1)];
@@ -106,7 +117,6 @@ if (Meteor.isClient) {
 					if( (monthWord == chosenMonth && currentYear == year) || year.toString() == chosenMonth){
 						var rightDateClass = "";
 						var rightDateClass = ( (currentIndex%2) == 0) ? "" : "rightDate";
-						console.log(rightDateClass);
 						$('.bubbleUlVert li:nth-child('+(currentIndex+1)+')').after('<li class="timeline-event offset-'+count+'"></li>');
 						$('.timelineVertical').prepend('<div class="arrow_box '+thisEvent.type+' offset-'+count+'"><div class="parentRotate '+rightDateClass+'"><div class="inner rotate '+rightDateClass+'">'+thisEvent.date+'</div></div><div class="rightSide"><table class="bubbleTable"><tr><td class="bubbleTableEvent">'+thisEvent.name+'</td></tr></table><p>'+thisEvent.description+'</p></div></div>');
 						count++;
@@ -119,13 +129,10 @@ if (Meteor.isClient) {
 				}
 				for (var it=0;it<count;it++){
 					var desiredOffset = $('.timeline-event.offset-'+it).offset();
-					console.log(desiredOffset)
 					if ( (currentIndex%2) == 0){
-						console.log('a******')
 						$('body').append('<style class="tempStyling">.arrow_box:before{visibility:visible !important; }</style>');
 						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left-($('.arrow_box.offset-'+it).width()+40)});				
 					}else{
-						console.log('b******')
 						$('body').append('<style class="tempStyling">.arrow_box:after{visibility:visible !important; }</style>');
 						$('.arrow_box.offset-'+it).offset({top: desiredOffset.top-20,left: desiredOffset.left + 40 });				
 					}

@@ -7,7 +7,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.13.1/mapbox-gl.css' rel='stylesheet'/>	
 	<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />   
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script> -->
 
 </head>
 <body class="grid-frame">
@@ -36,7 +36,9 @@
 						<input type="text" placeholder="What do you want to call this event?" class="event-name" maxlength="60">
 					</div>
 				</div>
-				<input type="text" id="location" name="location" placeholder="City or ZIP code">
+				<div id="locationField">
+					<input id="autocomplete" placeholder="City or ZIP code" type="text">
+				</div>				
 				<div class="row">
 					<div class="large-12 columns">
 					<label style="text-align:left;">Event Description
@@ -52,6 +54,10 @@
 		</div>
 		<a href="#" data-reveal-id="firstModal" class="button plot-event">Plot Event</a>
 		<a href="#" data-reveal-id="mapModal" class="button plot-event" id="openMap">Open Map</a>
+<!-- 				<div id="locationField">
+					<input id="autocomplete" placeholder="City or ZIP code" type="text">
+				</div>	 -->	
+
 		<input type="date" id="start-date" style="width:1px;height:1px;padding:0;">
 		<div class="timelineVertical" style="transition: margin-left 0.7s;">
 			<ul class="dateDivVert leftDate"></ul>

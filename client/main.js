@@ -127,11 +127,7 @@ function closeModal(){
 // 	});
 // }
 $(document).ready(function(){
-	// $('#openMap').on('click',function(){
-	// 	setTimeout(function(){
-	// 		loadMap();
-	// 	},200); 
-	// });
+	
 });
 function loadMap(){
 	mapboxgl.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';

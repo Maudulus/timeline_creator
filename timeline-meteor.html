@@ -3,14 +3,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>timeline-meteor</title>
 	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.13.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.13.1/mapbox-gl.css' rel='stylesheet'/>	
+	<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />   
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
 </head>
 <body class="grid-frame">
+	
 	<div class="grid-block home-div">
 		<div class="small-12 columns contain-to-grid">
 			<nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
 				{{> loginButtons}}
 			</nav>
 		</div>
+		<div id="mapModal" class="reveal-modal row" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+			<div id='map'></div>	
+			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+		</div>		
 		<div id="firstModal" class="reveal-modal row" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
 
 			<h2 id="firstModalTitle">Add an Event</h2>
@@ -25,19 +36,22 @@
 						<input type="text" placeholder="What do you want to call this event?" class="event-name" maxlength="60">
 					</div>
 				</div>
+				<input type="text" id="location" name="location" placeholder="City or ZIP code">
 				<div class="row">
 					<div class="large-12 columns">
 					<label style="text-align:left;">Event Description
 							<textarea placeholder="How would you describe this event?" class="event-description"></textarea>
 						</label>
 					</div>
-				</div>			
+				</div>	
+				{{> icons}}		
 				{{> modalButtons}}
 			</div>
 
 			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 		</div>
 		<a href="#" data-reveal-id="firstModal" class="button plot-event">Plot Event</a>
+		<a href="#" data-reveal-id="mapModal" class="button plot-event" id="openMap">Open Map</a>
 		<input type="date" id="start-date" style="width:1px;height:1px;padding:0;">
 		<div class="timelineVertical" style="transition: margin-left 0.7s;">
 			<ul class="dateDivVert leftDate"></ul>
@@ -46,7 +60,7 @@
 			<ul class="dateDivVert rightDate"></ul>
 			<ul class="bubbleUlVert"></ul>
 		</div>
-	</div>	
+	</div>		
 </body>
 <template name="modalButtons">
 	<ul class="stack-for-small button-group row">
@@ -57,4 +71,45 @@
 </template>
 <template name="map">
 	
+</template>
+<template name="icons">
+	<div class="iconSection row">
+		<label style="text-align:left;">Pick an icon:</label>
+		<img src="renders/aerialway-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/airport-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/alcohol-shop-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/america-football-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/art-gallery-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/bakery-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/bar-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/baseball-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/basketball-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/bicycle-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/cafe-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/camera-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/campsite-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/car-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/clothing-store-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/college-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/dog-park-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/fast-food-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/garden-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/gift-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/heart-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/ice-cream-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/library-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/music-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/park2-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/pitch-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/rail-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/restaurant-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/school-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/scooter-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/shop-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/skiing-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/suitcase-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/swimming-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/tennis-24@2x.png" class="columns small-3 medium-2 large-1">
+		<img src="renders/zoo-24@2x.png" class="columns small-3 medium-2 large-1">
+	</div>
 </template>

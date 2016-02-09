@@ -20,6 +20,60 @@ if (Meteor.isClient) {
 	Template.map.events({
 	});
 	Template.body.events({
+		"click #openMap": function(event){
+			setTimeout(function(){
+				mapboxgl.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
+				var map = new mapboxgl.Map({
+				    container: 'map',
+				    style: 'mapbox://styles/mapbox/streets-v8',
+				    center: [-96, 37.8],
+				    zoom: 3
+				});
+				var userEvents = newEvent.find({email:Meteor.user().emails[0].address}).fetch();
+				
+				map.on('style.load', function () {
+				    map.addSource("markers", {
+				        "type": "geojson",
+				        "data": {
+				            "type": "FeatureCollection",
+				            "features": [{
+				                "type": "Feature",
+				                "geometry": {
+				                    "type": "Point",
+				                    "coordinates": [-77.03238901390978, 38.913188059745586]
+				                },
+				                "properties": {
+				                    "title": "Mapbox DC",
+				                    "marker-symbol": "monument"
+				                }
+				            }, {
+				                "type": "Feature",
+				                "geometry": {
+				                    "type": "Point",
+				                    "coordinates": [-122.414, 37.776]
+				                },
+				                "properties": {
+				                    "title": "Mapbox SF",
+				                    "marker-symbol": "harbor"
+				                }
+				            }]
+				        }
+				    });
+				    map.addLayer({
+				        "id": "markers",
+				        "type": "symbol",
+				        "source": "markers",
+				        "layout": {
+				            "icon-image": "{marker-symbol}-15",
+				            "text-field": "{title}",
+				            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+				            "text-offset": [0, 0.6],
+				            "text-anchor": "top"
+				        }
+				    });
+				});	
+			},200); 
+		},
 		"blur #start-date": function (event) {
 			if( Meteor.user() && !StartDate.find({email:Meteor.user().emails[0].address}).fetch().length){
 				var date = event.target.value;

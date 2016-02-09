@@ -34,6 +34,23 @@ if (Meteor.isClient) {
 	        });
 		},
 		"click #openMap": function(event){
+			var features = [];
+			var userEvents = newEvent.find({email:Meteor.user().emails[0].address}).fetch();
+			for(var i=0; i < userEvents.length;i++){
+				if(userEvents[i].location){
+					features.push({
+						type:"Feature",
+						geometry:{
+							type:"Point",
+							coordinates:userEvents[i].location
+						},
+						properties:{
+							title:userEvents[i].name,
+							"marker-symbol":"marker"
+						},
+					});
+				}
+			}			
 			setTimeout(function(){
 				mapboxgl.accessToken = 'pk.eyJ1IjoibWF1ZHVsdXMiLCJhIjoiY2lqbHkxODBxMDA4dHU0bTVwOThiNjBqbCJ9.ALkY_spgnw5ZqOWx4qECZA';
 				var map = new mapboxgl.Map({
@@ -42,34 +59,13 @@ if (Meteor.isClient) {
 				    center: [-96, 37.8],
 				    zoom: 3
 				});
-				var userEvents = newEvent.find({email:Meteor.user().emails[0].address}).fetch();
-				
+				console.log(JSON.stringify(features));
 				map.on('style.load', function () {
 				    map.addSource("markers", {
 				        "type": "geojson",
 				        "data": {
 				            "type": "FeatureCollection",
-				            "features": [{
-				                "type": "Feature",
-				                "geometry": {
-				                    "type": "Point",
-				                    "coordinates": [-77.03238901390978, 38.913188059745586]
-				                },
-				                "properties": {
-				                    "title": "Mapbox DC",
-				                    "marker-symbol": "monument"
-				                }
-				            }, {
-				                "type": "Feature",
-				                "geometry": {
-				                    "type": "Point",
-				                    "coordinates": [-122.414, 37.776]
-				                },
-				                "properties": {
-				                    "title": "Mapbox SF",
-				                    "marker-symbol": "harbor"
-				                }
-				            }]
+				            "features": features
 				        }
 				    });
 				    map.addLayer({

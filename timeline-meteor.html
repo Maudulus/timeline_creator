@@ -7,17 +7,51 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.13.1/mapbox-gl.css' rel='stylesheet'/>	
 	<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />   
-	<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script> -->
-
 </head>
 <body class="grid-frame">
 	
 	<div class="grid-block home-div">
 		<div class="small-12 columns contain-to-grid">
-			<nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
+<!-- 			<nav class="top-bar toggle-topbar" data-topbar role="navigation" data-options="is_hover: false">
 				{{> loginButtons}}
-			</nav>
+			</nav> -->
 		</div>
+<div class="off-canvas-wrap docs-wrap" data-offcanvas="">
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" aria-expanded="false"><span></span></a>
+      </section>
+
+      <section class="right tab-bar-section">
+        <h1 class="title">Foundation</h1>
+      </section>
+
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      	{{> loginButtons}}
+        <li><label>Foundation</label></li>
+        <li><a href="#">The Psychohistorians</a></li>
+        <li><a href="#">The Encyclopedists</a></li>
+        <li><a href="#">The Mayors</a></li>
+        <li><a href="#">The Traders</a></li>
+        <li><a href="#">The Merchant Princes</a></li>
+        <li><label>Foundation and Empire</label></li>
+        <li><a href="#">The General</a></li>
+        <li><a href="#">The Mule</a></li>
+        <li><label>Second Foundation</label></li>
+        <li><a href="#">Search by the Mule</a></li>
+        <li><a href="#">Search by the Foundation</a></li>
+      </ul>
+    </aside>
+
+    <section class="main-section">
+      <div class="row">
+        <div class="large-12 columns">
+          <br>
+
 		<div id="mapModal" class="reveal-modal row" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
 			<div id='map'></div>	
 			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
@@ -66,6 +100,18 @@
 			<ul class="dateDivVert rightDate"></ul>
 			<ul class="bubbleUlVert"></ul>
 		</div>
+
+        </div>
+      </div>
+    </section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+
+
+
 	</div>		
 </body>
 <template name="modalButtons">
